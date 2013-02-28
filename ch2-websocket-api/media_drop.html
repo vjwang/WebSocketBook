@@ -1,0 +1,76 @@
+<!--   Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. -->
+
+<!--
+	The Definitive Guide to HTML5 WebSocket	
+-->
+	
+
+<!DOCTYPE html>
+<title>WebSocket Image Drop</title>
+<h1>Drop Image Here</h1>
+<script>
+    // initialize WebSocket connection
+    var wsUrl = "ws://echo.websocket.org/echo";
+    var ws = new WebSocket(wsUrl);
+    ws.onopen = function() {
+        console.log("open");
+    }
+    // handle binary image data received on the WebSocket
+    ws.onmessage = function(e) {
+        var blob = e.data;
+        console.log("message: " + blob.size + " bytes");
+
+        // work with prefixed URL API
+        if (window.webkitURL) {
+            URL = webkitURL;
+        }
+
+        var uri = URL.createObjectURL(blob);
+        var img = document.createElement("img");
+        img.src = uri;
+        document.body.appendChild(img);
+    }
+    // handle drop event
+    document.ondrop = function(e) {
+        document.body.style.backgroundColor = "#fff";
+        try {
+            e.preventDefault();
+            handleFileDrop(e.dataTransfer.files[0]);
+            return false;
+        } catch(err) {
+            console.log(err);
+        }
+    }
+    // provide some visual feedback for the drop area
+    document.ondragover = function(e) {
+        e.preventDefault();
+        document.body.style.backgroundColor = "#6fff41";
+    }
+    document.ondragleave = function() {
+        document.body.style.backgroundColor = "#fff";
+    }
+    // read binary file contents and send them on the WebSocket
+    function handleFileDrop(file) {
+        var reader = new FileReader();
+        reader.readAsArrayBuffer(file);
+        reader.onload = function() {
+            console.log("sending: " + file.name);
+            ws.send(reader.result);
+        }
+    }
+</script>

@@ -1,0 +1,26 @@
+<!--
+
+    Copyright (c) 2007-2010, Kaazing Corporation. All rights reserved.
+
+-->
+
+<!DOCTYPE html>
+<title>RFB over WebSocket</title>
+
+<script src="bytes.js"></script>
+<script src="RfbClient.js"></script>
+<script src="ui.js"></script>
+<script>
+url = "ws://localhost:8080/vnc";
+$ = function(s) { return document.getElementById(s); };
+
+onload = function() {
+    client = new VncClient();
+    client.connect(url, $("frame"));
+}
+</script>
+<link rel="stylesheet" href="vnc.css">
+
+<h1>RFB over WebSocket</h1>
+<div id="frame"></div>
+
