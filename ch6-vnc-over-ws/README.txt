@@ -6,7 +6,7 @@ What you need to run this example:
     The server must accept RFB with anonymous logins (no passwords).
     The RFB client used as an example here does not support passwords.
 
-  tcp-server.js
+  tcp-proxy.js
     Run with node. make sure websocket-example.js is in the same directory.
     This is the ws <-> tcp proxy that connects to the RFB/TCP server.
     The RFB server host and port are hardcoded into the JavaScript.
