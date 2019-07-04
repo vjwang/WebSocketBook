@@ -11,5 +11,3 @@ Use the files in this repository to build the following:
 * ch6-vnc-over-ws: a VNC client using RFB over WebSocket and a VNC server
 
 The book also comes with a <a href="http://kaazingcorp.cachefly.net/com/WebSocketBookVM/WebSocketBook.ova">VirtualBox VM</a> (about 2GB). If you want to get a feel for what's in the VM, see these <a href="http://www.websocket.org/book.html">screencasts</a>.
-
-<img src="http://www.apress.com/media/catalog/product/cache/9/image/9df78eab33525d08d6e5fb8d27136e95/A/9/A9781430247401-3d_2.png">
