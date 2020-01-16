@@ -51,6 +51,7 @@ The Definitive Guide to HTML5 WebSocket
 
             ws.onmessage = function(evt) {
                 log("MESSAGE RECEIVED: " + evt.data);
+                ws.close();
             }
         }
 
@@ -72,7 +73,6 @@ The Definitive Guide to HTML5 WebSocket
         function sendMessage(msg) {
             ws.send(msg);
             log("MESSAGE SENT");
-            ws.close();
         }
 
         // The window.addEventListener triggers when the web page is loaded
